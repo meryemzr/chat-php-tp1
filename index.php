@@ -1,8 +1,8 @@
 <?php
-// Configuration de la connexion à la base de données
-$dsn = 'mysql:host='.getenv("MARIADB_HOST").';dbname='.getenv("MARIADB_DATABASE").'';
-$username = getenv("MARIADB_USER");
-$password = getenv("MARIADB_PASSWORD");
+// Connexion à la base de données avec PDO
+$dsn = 'mysql:host=mariadb;dbname=mariadb';
+$username = "mariadb";
+$password = "KKZZ8T4uaTQWdp8WVi0tmseNUuQPO93nblT24rY70aoGniga5aN0IbDDn9Nl0Zet";
 
 try {
     $pdo = new PDO($dsn, $username, $password);
@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['username']) && !empty
             </div>
             <button type="submit" class="btn btn-primary">Envoyer</button>
         </form>
+
         <div id="messages">
             <?php
             $stmt = $pdo->query('SELECT username, message, created_at FROM messages ORDER BY created_at DESC');
