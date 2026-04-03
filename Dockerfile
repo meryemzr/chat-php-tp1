@@ -1,12 +1,14 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
-# Installer extensions nécessaires
-RUN docker-php-ext-install pdo pdo_mysql mysqli
+WORKDIR /app
 
-# Copier les fichiers dans Apache
-COPY . /var/www/html/
+COPY . /app
 
-# Donner les permissions
-RUN chown -R www-data:www-data /var/www/html
+# Installer mysqli pour la BDD
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-EXPOSE 80
+# Exposer le port
+EXPOSE 3000
+
+# Lancer le serveur PHP intégré
+CMD ["php", "-S", "0.0.0.0:3000", "-t", "/app"]
